@@ -9,7 +9,7 @@ runs:
   using: "composite"
   steps:
     - uses: release-drafter/release-drafter@v5
-        with:
-          publish: ${{ inputs.publish }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      with:
+        publish: ${{ inputs.publish }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
