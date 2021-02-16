@@ -1,21 +1,15 @@
-name: 'Hello World'
-description: 'Greet someone'
+name: 'Release Drafter Composite'
+description: 'Creates a new release '
 inputs:
-  who-to-greet:
-    description: 'Who to greet'
+  publish:
+    description: 'whether to publish release'
     required: true
-    default: 'B'
-ouputs:
-  random-number:
-    description: 'Rando'
-    value: ${{ steps.random-number-generator.outputs.random-id }}
+    default: false
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}, from B
-      shell: bash
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
-      shell: bash
-    - run: ${{ github.action_path }}/goodbye.sh
-      shell: bash
+    - uses: release-drafter/release-drafter@v5
+        with:
+          publish: ${{ inputs.publish }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
